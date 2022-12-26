@@ -1,13 +1,11 @@
 package mk.fcse.musicplatformbackend.web.controller;
 
 import mk.fcse.musicplatformbackend.service.PlaylistService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/playlists")
+@CrossOrigin
 public class PlaylistController {
 
     private final PlaylistService playlistService;
