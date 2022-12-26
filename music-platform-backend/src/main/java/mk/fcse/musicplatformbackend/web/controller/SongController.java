@@ -1,22 +1,29 @@
 package mk.fcse.musicplatformbackend.web.controller;
 
+import mk.fcse.musicplatformbackend.model.view.SongReviewsView;
+import mk.fcse.musicplatformbackend.service.ReviewService;
 import mk.fcse.musicplatformbackend.service.SongService;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequestMapping("/songs")
 public class SongController {
 
     private final SongService songService;
+    private final ReviewService reviewService;
 
-    public SongController(SongService songService) {
+    public SongController(SongService songService, ReviewService reviewService) {
         this.songService = songService;
+        this.reviewService = reviewService;
+    }
+
+    @GetMapping("/reviews")
+    public List<SongReviewsView> getAllSongReviews() {
+        return reviewService.listSongsWithReviews();
     }
 
     @PostMapping("/add")
