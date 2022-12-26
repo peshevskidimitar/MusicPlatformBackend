@@ -1,7 +1,10 @@
 package mk.fcse.musicplatformbackend.web.controller;
 
+import mk.fcse.musicplatformbackend.model.view.UserPlaylistsView;
 import mk.fcse.musicplatformbackend.service.PlaylistService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/playlists")
@@ -12,6 +15,11 @@ public class PlaylistController {
 
     public PlaylistController(PlaylistService playlistService) {
         this.playlistService = playlistService;
+    }
+
+    @GetMapping("/all")
+    public List<UserPlaylistsView> getAllUserPlaylists() {
+        return playlistService.listUsersWithPlaylists();
     }
 
     @PostMapping("/add")

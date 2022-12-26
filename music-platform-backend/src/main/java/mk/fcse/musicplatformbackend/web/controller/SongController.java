@@ -1,6 +1,7 @@
 package mk.fcse.musicplatformbackend.web.controller;
 
 import mk.fcse.musicplatformbackend.model.view.SongReviewsView;
+import mk.fcse.musicplatformbackend.model.view.SongsView;
 import mk.fcse.musicplatformbackend.service.ReviewService;
 import mk.fcse.musicplatformbackend.service.SongService;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -20,6 +21,11 @@ public class SongController {
     public SongController(SongService songService, ReviewService reviewService) {
         this.songService = songService;
         this.reviewService = reviewService;
+    }
+
+    @GetMapping("/all")
+    public List<SongsView> getAllSongs() {
+        return songService.listSongs();
     }
 
     @GetMapping("/reviews")
