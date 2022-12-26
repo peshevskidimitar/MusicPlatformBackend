@@ -19,6 +19,7 @@ public class SongReviewsView {
     private String songTitle;
     private LocalDate songDatePublished;
     private String reviewContent;
+    private Integer reviewGrade;
     private LocalDate reviewDateCreated;
     private String userUsername;
 
