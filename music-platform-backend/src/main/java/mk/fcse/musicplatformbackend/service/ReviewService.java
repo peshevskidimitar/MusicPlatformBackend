@@ -1,5 +1,6 @@
 package mk.fcse.musicplatformbackend.service;
 
+import mk.fcse.musicplatformbackend.model.stats.CountOfSongsPerGenreView;
 import mk.fcse.musicplatformbackend.model.view.SongReviewsView;
 
 import java.time.LocalDate;
@@ -12,4 +13,6 @@ public interface ReviewService {
                          Integer userId,
                          Integer grade);
     List<SongReviewsView> listSongsWithReviews();
+
+    List<CountOfSongsPerGenreView> listSongsByGenre();
 }

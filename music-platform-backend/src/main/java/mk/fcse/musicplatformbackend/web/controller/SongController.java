@@ -1,5 +1,6 @@
 package mk.fcse.musicplatformbackend.web.controller;
 
+import mk.fcse.musicplatformbackend.model.stats.CountOfSongsPerGenreView;
 import mk.fcse.musicplatformbackend.model.view.SongReviewsView;
 import mk.fcse.musicplatformbackend.model.view.SongsView;
 import mk.fcse.musicplatformbackend.service.ReviewService;
@@ -31,6 +32,11 @@ public class SongController {
     @GetMapping("/reviews")
     public List<SongReviewsView> getAllSongReviews() {
         return reviewService.listSongsWithReviews();
+    }
+
+    @GetMapping("/byGenre")
+    public List<CountOfSongsPerGenreView> getSongsByGenre() {
+        return reviewService.listSongsByGenre();
     }
 
     @PostMapping("/add")

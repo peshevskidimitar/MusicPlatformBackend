@@ -1,5 +1,7 @@
 package mk.fcse.musicplatformbackend.web.controller;
 
+import mk.fcse.musicplatformbackend.model.stats.AverageCountOfSongsPerUserPlaylistView;
+import mk.fcse.musicplatformbackend.model.stats.CountOfSongsPerPlaylistView;
 import mk.fcse.musicplatformbackend.model.view.UserPlaylistsView;
 import mk.fcse.musicplatformbackend.service.PlaylistService;
 import org.springframework.web.bind.annotation.*;
@@ -29,4 +31,13 @@ public class PlaylistController {
         playlistService.insertNewPlaylist(title, playlistTypeId, userId);
     }
 
+    @GetMapping("/stats")
+    public List<AverageCountOfSongsPerUserPlaylistView> getAllStats(){
+        return playlistService.getStats();
+    }
+
+    @GetMapping("/getCountSongs")
+    public List<CountOfSongsPerPlaylistView> getCountOfSongs(){
+        return playlistService.getCountOfSongs();
+    }
 }
