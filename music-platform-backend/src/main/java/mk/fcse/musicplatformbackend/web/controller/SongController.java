@@ -1,5 +1,6 @@
 package mk.fcse.musicplatformbackend.web.controller;
 
+import mk.fcse.musicplatformbackend.model.Song;
 import mk.fcse.musicplatformbackend.model.stats.CountOfSongsPerGenreView;
 import mk.fcse.musicplatformbackend.model.stats.MostPopularSongsPerYearView;
 import mk.fcse.musicplatformbackend.model.stats.TotalViewsOfArtistSongsView;
@@ -30,6 +31,11 @@ public class SongController {
         this.songService = songService;
         this.reviewService = reviewService;
         this.songStorageService = fileStorageService;
+    }
+
+    @GetMapping
+    public List<Song> getAll() {
+        return songService.findAll();
     }
 
     @GetMapping("/all")
