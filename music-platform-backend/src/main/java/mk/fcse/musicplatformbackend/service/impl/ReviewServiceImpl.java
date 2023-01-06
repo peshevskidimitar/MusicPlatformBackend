@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -32,6 +33,13 @@ public class ReviewServiceImpl implements ReviewService {
     @Override
     public List<SongReviewsView> listSongsWithReviews() {
         return songReviewsViewRepository.findAll();
+    }
+
+    @Override
+    public List<SongReviewsView> listSongsWithReviews(String songTitle) {
+        return listSongsWithReviews().stream()
+                .filter(songReviewsView -> songReviewsView.getSongTitle().equals(songTitle))
+                .collect(Collectors.toList());
     }
 
     @Override

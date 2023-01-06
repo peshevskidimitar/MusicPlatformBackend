@@ -44,7 +44,10 @@ public class SongController {
     }
 
     @GetMapping("/reviews")
-    public List<SongReviewsView> getAllSongReviews() {
+    public List<SongReviewsView> getAllSongReviews(@RequestParam(required = false) String songTitle) {
+        if (songTitle != null)
+            return reviewService.listSongsWithReviews(songTitle);
+
         return reviewService.listSongsWithReviews();
     }
 

@@ -11,6 +11,7 @@ public interface ReviewService {
                          Integer userId,
                          Integer grade);
     List<SongReviewsView> listSongsWithReviews();
+    List<SongReviewsView> listSongsWithReviews(String songTitle);
 
     List<CountOfSongsPerGenreView> listSongsByGenre();
 }
