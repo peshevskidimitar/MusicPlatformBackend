@@ -1,5 +1,6 @@
 package mk.fcse.musicplatformbackend.web.controller;
 
+import mk.fcse.musicplatformbackend.model.AudioContent;
 import mk.fcse.musicplatformbackend.model.stats.MonthlyReviewsAndAverageGradePerAudioContentView;
 import mk.fcse.musicplatformbackend.service.AudioContentService;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,6 +19,11 @@ public class AudioContentController {
 
     public AudioContentController(AudioContentService audioContentService) {
         this.audioContentService = audioContentService;
+    }
+
+    @GetMapping("/all")
+    public List<AudioContent> getAllAudioContents() {
+        return audioContentService.findAll();
     }
 
     @GetMapping("/reviews-stats")

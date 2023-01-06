@@ -1,5 +1,6 @@
 package mk.fcse.musicplatformbackend.web.controller;
 
+import mk.fcse.musicplatformbackend.model.Playlist;
 import mk.fcse.musicplatformbackend.model.stats.AverageCountOfSongsPerUserPlaylistView;
 import mk.fcse.musicplatformbackend.model.stats.CountOfSongsPerPlaylistView;
 import mk.fcse.musicplatformbackend.model.view.UserPlaylistsView;
@@ -17,6 +18,11 @@ public class PlaylistController {
 
     public PlaylistController(PlaylistService playlistService) {
         this.playlistService = playlistService;
+    }
+
+    @GetMapping
+    public List<Playlist> getAllPlaylists() {
+        return playlistService.findAll();
     }
 
     @GetMapping("/all")

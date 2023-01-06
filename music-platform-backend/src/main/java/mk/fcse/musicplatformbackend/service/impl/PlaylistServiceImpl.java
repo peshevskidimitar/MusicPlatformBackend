@@ -1,5 +1,6 @@
 package mk.fcse.musicplatformbackend.service.impl;
 
+import mk.fcse.musicplatformbackend.model.Playlist;
 import mk.fcse.musicplatformbackend.model.stats.AverageCountOfSongsPerUserPlaylistView;
 import mk.fcse.musicplatformbackend.model.stats.CountOfSongsPerPlaylistView;
 import mk.fcse.musicplatformbackend.model.view.UserPlaylistsView;
@@ -23,6 +24,11 @@ public class PlaylistServiceImpl implements PlaylistService {
         this.averageCountOfSongsPerUserPlaylistRepository = averageCountOfSongsPerUserPlaylistRepository;
         this.countOfSongsPerPlaylistViewRepository = countOfSongsPerPlaylistViewRepository;
 
+    }
+
+    @Override
+    public List<Playlist> findAll() {
+        return playlistRepository.findAll();
     }
 
     @Override
