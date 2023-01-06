@@ -5,10 +5,12 @@ import mk.fcse.musicplatformbackend.model.stats.MostPopularSongsPerYearView;
 import mk.fcse.musicplatformbackend.model.stats.TotalViewsOfArtistSongsView;
 import mk.fcse.musicplatformbackend.model.view.SongReviewsView;
 import mk.fcse.musicplatformbackend.model.view.SongsView;
+import mk.fcse.musicplatformbackend.service.SongStorageService;
 import mk.fcse.musicplatformbackend.service.ReviewService;
 import mk.fcse.musicplatformbackend.service.SongService;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,10 +22,12 @@ public class SongController {
 
     private final SongService songService;
     private final ReviewService reviewService;
+    private final SongStorageService songStorageService;
 
-    public SongController(SongService songService, ReviewService reviewService) {
+    public SongController(SongService songService, ReviewService reviewService, SongStorageService fileStorageService) {
         this.songService = songService;
         this.reviewService = reviewService;
+        this.songStorageService = fileStorageService;
     }
 
     @GetMapping("/all")
@@ -48,19 +52,20 @@ public class SongController {
 
     @GetMapping("/total-views")
     public List<TotalViewsOfArtistSongsView> getTotalViewsOfArtistSongs() {
-        return songService.totalViewsOfAritstSongs();
+        return songService.totalViewsOfArtistSongs();
     }
 
-    @PostMapping("/add")
+    @PostMapping(value = "/add", consumes = "multipart/form-data")
     public void insertNewSong(@RequestParam String title,
-                              @RequestParam String filePath,
                               @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate datePublished,
                               @RequestParam Integer genreId,
                               @RequestParam String lyrics,
                               @RequestParam Integer albumId,
                               @RequestParam Integer recordLabelId,
-                              @RequestParam Integer artistId) {
-        songService.insertNewSong(title, filePath, datePublished, genreId, lyrics, albumId, recordLabelId, artistId);
+                              @RequestParam Integer artistId,
+                              @RequestParam MultipartFile song) {
+        songStorageService.save(song, title);
+        songService.insertNewSong(title, datePublished, genreId, lyrics, albumId, recordLabelId, artistId);
     }
 
     @PostMapping("/add-to-playlist")

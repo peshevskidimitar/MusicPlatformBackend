@@ -1,5 +1,6 @@
 package mk.fcse.musicplatformbackend.service.impl;
 
+import mk.fcse.musicplatformbackend.model.Song;
 import mk.fcse.musicplatformbackend.model.stats.MostPopularSongsPerYearView;
 import mk.fcse.musicplatformbackend.model.stats.TotalViewsOfArtistSongsView;
 import mk.fcse.musicplatformbackend.model.view.SongsView;
@@ -31,8 +32,13 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public void insertNewSong(String title, String filePath, LocalDate datePublished, Integer genreId, String lyrics, Integer albumId, Integer recordLabelId, Integer artistId) {
-        songRepository.insertNewSong(title, filePath, datePublished, genreId, lyrics, albumId, recordLabelId, artistId);
+    public List<Song> findAll() {
+        return songRepository.findAll();
+    }
+
+    @Override
+    public void insertNewSong(String title, LocalDate datePublished, Integer genreId, String lyrics, Integer albumId, Integer recordLabelId, Integer artistId) {
+        songRepository.insertNewSong(title, "/songs", datePublished, genreId, lyrics, albumId, recordLabelId, artistId);
     }
 
     @Override
@@ -51,7 +57,7 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
-    public List<TotalViewsOfArtistSongsView> totalViewsOfAritstSongs() {
+    public List<TotalViewsOfArtistSongsView> totalViewsOfArtistSongs() {
         return totalViewsOfArtistSongsViewRepository.findAll();
     }
 
