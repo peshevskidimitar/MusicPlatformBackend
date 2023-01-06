@@ -1,5 +1,6 @@
 package mk.fcse.musicplatformbackend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ public class Library {
     private Integer id;
     @OneToOne
     @JoinColumn(name = "id_user", nullable = false)
+    @JsonIgnoreProperties(value = "library")
     private User user;
     @ManyToMany
     @JoinTable(

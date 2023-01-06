@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Table(name="user", schema = "public")
 @Data
 @NoArgsConstructor
 public class User {
@@ -34,6 +35,7 @@ public class User {
     @JsonIgnoreProperties(value = "users")
     private List<Role> roles;
     @OneToOne(mappedBy = "user")
+    @JsonIgnoreProperties(value = {"user", "playlists"})
     private Library library;
 
 }
