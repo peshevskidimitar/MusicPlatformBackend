@@ -25,8 +25,8 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void insertNewReview(String content, LocalDate dateCreated, Integer audioContentId, Integer userId, Integer grade) {
-        reviewRepository.insertNewReview(content, dateCreated, audioContentId, userId, grade);
+    public void insertNewReview(String content, Integer audioContentId, Integer userId, Integer grade) {
+        reviewRepository.insertNewReview(content, LocalDate.now(), audioContentId, userId, grade);
     }
 
     @Override
