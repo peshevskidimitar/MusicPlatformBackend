@@ -1,6 +1,8 @@
 package mk.fcse.musicplatformbackend.web.controller;
 
 import mk.fcse.musicplatformbackend.model.stats.CountOfSongsPerGenreView;
+import mk.fcse.musicplatformbackend.model.stats.MostPopularSongsPerYearView;
+import mk.fcse.musicplatformbackend.model.stats.TotalViewsOfArtistSongsView;
 import mk.fcse.musicplatformbackend.model.view.SongReviewsView;
 import mk.fcse.musicplatformbackend.model.view.SongsView;
 import mk.fcse.musicplatformbackend.service.ReviewService;
@@ -37,6 +39,16 @@ public class SongController {
     @GetMapping("/byGenre")
     public List<CountOfSongsPerGenreView> getSongsByGenre() {
         return reviewService.listSongsByGenre();
+    }
+
+    @GetMapping("/most-popular")
+    public List<MostPopularSongsPerYearView> getMostPopularSongsPerYear() {
+        return songService.mostPopularSongsPerYear();
+    }
+
+    @GetMapping("/total-views")
+    public List<TotalViewsOfArtistSongsView> getTotalViewsOfArtistSongs() {
+        return songService.totalViewsOfAritstSongs();
     }
 
     @PostMapping("/add")
