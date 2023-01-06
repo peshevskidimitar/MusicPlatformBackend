@@ -1,6 +1,6 @@
 package mk.fcse.musicplatformbackend.web.controller;
 
-import mk.fcse.musicplatformbackend.model.view.PodcastsView;
+import mk.fcse.musicplatformbackend.model.helper.PodcastsViewHelper;
 import mk.fcse.musicplatformbackend.service.PodcastService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +21,8 @@ public class PodcastController {
     }
 
     @GetMapping("/all")
-    public List<PodcastsView> getAllPodcasts() {
-        return podcastService.listPodcasts();
+    public List<PodcastsViewHelper> getAllPodcasts() {
+        return podcastService.listPodcastHelpers();
     }
 
 }
