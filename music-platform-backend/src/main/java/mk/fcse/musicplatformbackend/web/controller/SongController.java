@@ -9,6 +9,8 @@ import mk.fcse.musicplatformbackend.service.SongStorageService;
 import mk.fcse.musicplatformbackend.service.ReviewService;
 import mk.fcse.musicplatformbackend.service.SongService;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -55,7 +57,8 @@ public class SongController {
         return songService.totalViewsOfArtistSongs();
     }
 
-    @PostMapping(value = "/add", consumes = "multipart/form-data")
+    @PostMapping(value = "/add", consumes = "multipart/form-data", produces = MediaType.APPLICATION_JSON_VALUE)
+    @Transactional(rollbackFor = Exception.class)
     public void insertNewSong(@RequestParam String title,
                               @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate datePublished,
                               @RequestParam Integer genreId,
