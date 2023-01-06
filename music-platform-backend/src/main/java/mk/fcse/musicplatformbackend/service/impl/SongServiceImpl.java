@@ -1,6 +1,8 @@
 package mk.fcse.musicplatformbackend.service.impl;
 
 import mk.fcse.musicplatformbackend.model.Song;
+import mk.fcse.musicplatformbackend.model.helper.MusicProfessionalHelper;
+import mk.fcse.musicplatformbackend.model.helper.SongsViewHelper;
 import mk.fcse.musicplatformbackend.model.stats.MostPopularSongsPerYearView;
 import mk.fcse.musicplatformbackend.model.stats.TotalViewsOfArtistSongsView;
 import mk.fcse.musicplatformbackend.model.view.SongsView;
@@ -12,6 +14,7 @@ import mk.fcse.musicplatformbackend.service.SongService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -49,6 +52,45 @@ public class SongServiceImpl implements SongService {
     @Override
     public List<SongsView> listSongs() {
         return songsViewRepository.findAll();
+    }
+
+    @Override
+    public List<SongsViewHelper> listSongHelpers() {
+        List<SongsViewHelper> list = new ArrayList<>();
+        for (SongsView songsView : songsViewRepository.findAll()) {
+            SongsViewHelper songsViewHelper = list.stream()
+                    .filter(element -> element.getSongTitle().equals(songsView.getSongTitle()))
+                    .findFirst()
+                    .orElse(null);
+
+            if (songsViewHelper == null) {
+                songsViewHelper = new SongsViewHelper(
+                        songsView.getId(),
+                        songsView.getSongTitle(),
+                        songsView.getSongDatePublished(),
+                        songsView.getSongViews(),
+                        songsView.getGenreName(),
+                        songsView.getArtistFullName(),
+                        songsView.getArtistCountry(),
+                        songsView.getAlbumTitle(),
+                        songsView.getRecordLabelName()
+                );
+
+                list.add(songsViewHelper);
+            }
+
+            if (songsView.getMusicProfessionalName() != null
+                    && songsView.getMusicProfessionalSurname() != null
+                    && songsView.getMusicProfessionalProfession() != null) {
+                songsViewHelper.getMusicProfessionals().add(new MusicProfessionalHelper(
+                        songsView.getMusicProfessionalName(),
+                        songsView.getMusicProfessionalSurname(),
+                        songsView.getMusicProfessionalProfession()
+                ));
+            }
+        }
+
+        return list;
     }
 
     @Override
