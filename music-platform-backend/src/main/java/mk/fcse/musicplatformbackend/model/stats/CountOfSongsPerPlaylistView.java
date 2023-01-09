@@ -18,6 +18,7 @@ public class CountOfSongsPerPlaylistView {
     @Id
     @Column(name = "id_playlist")
     private Integer playlistId;
+    private String username;
     private String title;
     private Integer countOfSongs;
 

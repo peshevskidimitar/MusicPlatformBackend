@@ -47,7 +47,10 @@ public class PlaylistController {
     }
 
     @GetMapping("/getCountSongs")
-    public List<CountOfSongsPerPlaylistView> getCountOfSongs(){
+    public List<CountOfSongsPerPlaylistView> getCountOfSongs(@RequestParam(required = false) String username){
+        if (username != null)
+            return playlistService.getCountOfSongs(username);
+
         return playlistService.getCountOfSongs();
     }
 

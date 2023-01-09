@@ -16,5 +16,7 @@ public interface PlaylistService {
 
     List<AverageCountOfSongsPerUserPlaylistView> getStats();
 
+    List<CountOfSongsPerPlaylistView> getCountOfSongs(String username);
+
     List<CountOfSongsPerPlaylistView> getCountOfSongs();
 }

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -94,6 +93,13 @@ public class PlaylistServiceImpl implements PlaylistService {
     @Override
     public List<AverageCountOfSongsPerUserPlaylistView> getStats() {
         return averageCountOfSongsPerUserPlaylistRepository.findAll();
+    }
+
+    @Override
+    public List<CountOfSongsPerPlaylistView> getCountOfSongs(String username) {
+        return countOfSongsPerPlaylistViewRepository.findAll().stream()
+                .filter(countOfSongsPerPlaylistView -> countOfSongsPerPlaylistView.getUsername().equals(username))
+                .collect(Collectors.toList());
     }
 
     @Override
