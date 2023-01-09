@@ -7,7 +7,9 @@ import mk.fcse.musicplatformbackend.repository.MonthlyReviewsAndAverageGradePerA
 import mk.fcse.musicplatformbackend.service.AudioContentService;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AudioContentServiceImpl implements AudioContentService {
@@ -28,7 +30,10 @@ public class AudioContentServiceImpl implements AudioContentService {
 
     @Override
     public List<MonthlyReviewsAndAverageGradePerAudioContentView> getReviewsStats() {
-        return monthlyReviewsAndAverageGradePerAudioContentViewRepository.findAll();
+        return monthlyReviewsAndAverageGradePerAudioContentViewRepository.findAll().stream()
+                .sorted(Comparator.comparing(MonthlyReviewsAndAverageGradePerAudioContentView::getYear)
+                        .thenComparing(MonthlyReviewsAndAverageGradePerAudioContentView::getMonth))
+                .collect(Collectors.toList());
     }
 
 }

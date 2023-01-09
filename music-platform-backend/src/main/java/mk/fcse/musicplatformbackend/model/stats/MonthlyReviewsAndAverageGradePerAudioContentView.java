@@ -19,10 +19,10 @@ import java.math.BigInteger;
 public class MonthlyReviewsAndAverageGradePerAudioContentView {
 
     @Id
-    @Column(name = "id_audio_content")
-    private Integer audioContentId;
+    private Integer id;
     private String title;
     private BigInteger month;
+    private BigInteger year;
     private Integer totalReviews;
     private BigDecimal averageGrade;
 
