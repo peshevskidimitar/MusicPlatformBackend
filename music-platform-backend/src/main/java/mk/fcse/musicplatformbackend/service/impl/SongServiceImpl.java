@@ -15,7 +15,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SongServiceImpl implements SongService {
@@ -95,7 +97,9 @@ public class SongServiceImpl implements SongService {
 
     @Override
     public List<MostPopularSongsPerYearView> mostPopularSongsPerYear() {
-        return mostPopularSongsPerYearViewRepository.findAll();
+        return mostPopularSongsPerYearViewRepository.findAll().stream()
+                .sorted(Comparator.comparing(MostPopularSongsPerYearView::getYear))
+                .collect(Collectors.toList());
     }
 
     @Override
